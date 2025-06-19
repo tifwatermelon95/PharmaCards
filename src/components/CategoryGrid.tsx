@@ -74,39 +74,39 @@ const CategoryGrid = ({ onStartStudy }: CategoryGridProps) => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 px-4 pb-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-blue-900 mb-4">Choose Your Study Categories</h2>
-        <p className="text-blue-600 max-w-2xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">Choose Your Study Categories</h2>
+        <p className="text-blue-600 max-w-2xl mx-auto text-sm md:text-base">
           Select the pharmaceutical categories you want to study and customize your learning experience
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {categories.map((category) => (
           <Card
             key={category.id}
-            className={`cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg border-2 ${
+            className={`cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg border-2 rounded-xl ${
               selectedCategories.includes(category.id)
                 ? 'border-blue-500 shadow-lg bg-blue-50'
                 : 'border-gray-200 hover:border-blue-300'
             }`}
             onClick={() => toggleCategory(category.id)}
           >
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-3 px-4 pt-4">
               <div className="flex justify-between items-start">
-                <CardTitle className="text-sm font-semibold text-blue-900 leading-tight">
+                <CardTitle className="text-sm md:text-base font-semibold text-blue-900 leading-tight flex-1 pr-2">
                   {category.name}
                 </CardTitle>
                 <Checkbox
                   checked={selectedCategories.includes(category.id)}
                   onChange={() => {}}
-                  className="ml-2"
+                  className="ml-2 flex-shrink-0"
                 />
               </div>
             </CardHeader>
-            <CardContent>
-              <Badge className={`${category.color} text-xs`}>
+            <CardContent className="px-4 pb-4">
+              <Badge className={`${category.color} text-xs rounded-full`}>
                 {category.count} cards
               </Badge>
             </CardContent>
@@ -115,15 +115,15 @@ const CategoryGrid = ({ onStartStudy }: CategoryGridProps) => {
       </div>
 
       {selectedCategories.length > 0 && (
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 px-4">
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline" className="flex items-center space-x-2">
+              <Button variant="outline" className="flex items-center justify-center space-x-2 w-full sm:w-auto rounded-xl">
                 <Settings className="h-4 w-4" />
                 <span>Customize Study Session</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md">
+            <DialogContent className="max-w-md mx-4 rounded-xl">
               <DialogHeader>
                 <DialogTitle>Study Session Settings</DialogTitle>
               </DialogHeader>
@@ -168,12 +168,12 @@ const CategoryGrid = ({ onStartStudy }: CategoryGridProps) => {
           <Button
             onClick={handleStartStudy}
             disabled={selectedQuestionTypes.length === 0}
-            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2"
+            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center space-x-2 w-full sm:w-auto rounded-xl"
           >
             <Play className="h-4 w-4" />
             <span>Start Study Session</span>
-            <Badge variant="secondary" className="ml-2 bg-white text-blue-600">
-              {selectedCategories.length} categories
+            <Badge variant="secondary" className="ml-2 bg-white text-blue-600 rounded-full">
+              {selectedCategories.length}
             </Badge>
           </Button>
         </div>
